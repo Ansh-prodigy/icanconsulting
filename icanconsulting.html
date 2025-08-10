@@ -6,6 +6,8 @@
     <title>I-Can Consulting - Empowering Early Career Professionals</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <style>
         /* Reset and Base Styles */
         * {
@@ -884,8 +886,18 @@
                             </div>
                         </div>
 
+                        <div class="form-section">
+                            <h3>Book Your Session</h3>
+                            <p style="margin-bottom: 1rem; color: #666;">Choose your preferred time slot using our calendar:</p>
+                            <div class="calendly-inline-widget" data-url="https://calendly.com/arun-desikan/ican-consulting" style="min-width:320px;height:700px;"></div>
+                            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                        </div>
+
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+                            <button type="button" class="btn btn-secondary" onclick="openCalendly()" style="margin-left: 1rem;">
+                                <i class="fas fa-calendar-alt"></i> Book with Calendly
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -935,13 +947,13 @@
                     <div class="about-section">
                         <h3>Connect With Us</h3>
                         <div class="social-links">
-                            <a href="https://www.linkedin.com/in/your-profile" target="_blank" class="social-link linkedin">
+                            <a href="https://www.linkedin.com/in/arundesikan" target="_blank" class="social-link linkedin">
                                 <i class="fab fa-linkedin"></i>
-                                <span>Connect on LinkedIn</span>
+                                <span>Connect with Arun Desikan</span>
                             </a>
-                            <a href="mailto:contact@icanconsulting.com" class="social-link email">
+                            <a href="mailto:Arunn.desikan@gmail.com" class="social-link email">
                                 <i class="fas fa-envelope"></i>
-                                <span>Email Us</span>
+                                <span>Email Arun</span>
                             </a>
                         </div>
                     </div>
@@ -985,7 +997,7 @@
             </div>
             <div class="footer-section">
                 <h4>Contact</h4>
-                <p>Email: contact@icanconsulting.com</p>
+                <p>Email: Arunn.desikan@gmail.com</p>
                 <p>Available: Mon, Wed, Fri (6-8 PM)</p>
                 <p>Sat, Sun (1-4 PM)</p>
             </div>
@@ -1050,6 +1062,13 @@
                 closeModal();
             }
         });
+
+        // Calendly popup function
+        function openCalendly() {
+            Calendly.initPopupWidget({
+                url: 'https://calendly.com/arun-desikan/ican-consulting'
+            });
+        }
 
         // AI Agent Booking System
         class BookingAI {
@@ -1158,6 +1177,43 @@
         // Initialize AI Agent
         const bookingAI = new BookingAI();
 
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
+
+        // Email Service Functions
+        async function sendNotificationEmail(bookingData, result) {
+            try {
+                // Send notification to Arun
+                await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                    to_email: "Arunn.desikan@gmail.com",
+                    from_name: `${bookingData.firstName} ${bookingData.lastName}`,
+                    from_email: bookingData.email,
+                    session_type: bookingData.sessionType.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                    industry: bookingData.industry,
+                    career_goals: bookingData.careerGoals,
+                    current_challenges: bookingData.currentChallenges,
+                    specific_questions: bookingData.specificQuestions,
+                    preferred_days: bookingData.preferredDays.join(', '),
+                    scheduled_time: result.slot ? `${result.slot.day} at ${result.slot.time} on ${result.slot.date.toLocaleDateString()}` : 'To be confirmed'
+                });
+
+                // Send acknowledgment to client
+                await emailjs.send("YOUR_SERVICE_ID", "YOUR_ACKNOWLEDGMENT_TEMPLATE_ID", {
+                    to_email: bookingData.email,
+                    to_name: `${bookingData.firstName} ${bookingData.lastName}`,
+                    session_type: bookingData.sessionType.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                    scheduled_time: result.slot ? `${result.slot.day} at ${result.slot.time} on ${result.slot.date.toLocaleDateString()}` : 'To be confirmed'
+                });
+
+                return true;
+            } catch (error) {
+                console.error('Email sending failed:', error);
+                return false;
+            }
+        }
+
         // Form Submission Handler
         document.getElementById('bookingForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1196,6 +1252,9 @@
                 const result = bookingAI.processBooking(bookingData);
                 
                 if (result.success) {
+                    // Send emails
+                    const emailSent = await sendNotificationEmail(bookingData, result);
+                    
                     const modalContent = document.querySelector('.modal-content');
                     modalContent.innerHTML = `
                         <span class="close" onclick="closeModal()">&times;</span>
@@ -1209,7 +1268,7 @@
                             <p><strong>Industry:</strong> ${bookingData.industry}</p>
                         </div>
                         <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
-                            You will receive a confirmation email with meeting details and preparation materials within 24 hours.
+                            ${emailSent ? 'Confirmation emails have been sent to both you and Arun.' : 'You will receive a confirmation email with meeting details and preparation materials within 24 hours.'}
                         </p>
                         <div class="modal-actions">
                             <button class="btn btn-primary" onclick="closeModal()">Close</button>
