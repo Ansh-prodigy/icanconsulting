@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I-Can Consulting - Empowering Early Career Professionals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo h2 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .feature h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #333;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        /* Empowerment Section */
+        .empowerment-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .empowerment-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .empowerment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .empowerment-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .empowerment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .empowerment-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        /* Booking Section */
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .booking-container h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .booking-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkbox-label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* About Section */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .about-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            margin-bottom: 4rem;
+        }
+
+        .about-section h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit i {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .benefit h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-link.linkedin {
+            background: #0077b5;
+            color: white;
+        }
+
+        .social-link.email {
+            background: #667eea;
+            color: white;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .session-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal-content h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: #667eea;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-features {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .session-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .hero-section {
+                padding: 3rem 1rem;
+            }
+
+            .booking-container {
+                padding: 2rem 1rem;
+            }
+
+            .booking-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .about-container {
+                padding: 2rem 1rem;
+            }
+
+            .empowerment-section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>I-Can Consulting</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="switchTab('home')">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="switchTab('booking')">Book Session</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="switchTab('about')">About Us</a>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Tab -->
+        <section id="home" class="tab-content active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Empower Your Career Journey</h1>
+                    <p class="hero-subtitle">Transform your early career challenges into opportunities with personalized guidance from an experienced professional.</p>
+                    <div class="hero-features">
+                        <div class="feature">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Career Acceleration</h3>
+                            <p>Navigate your career path with confidence and strategic direction.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Strategic Insights</h3>
+                            <p>Gain industry-specific knowledge and actionable advice.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <h3>Personalized Guidance</h3>
+                            <p>One-on-one sessions tailored to your unique situation and goals.</p>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a class="btn btn-primary" onclick="switchTab('booking')">Book Your Session</a>
+                        <a class="btn btn-secondary" onclick="switchTab('about')">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="empowerment-section">
+                <h2>How to Empower Your Career</h2>
+                <div class="empowerment-grid">
+                    <div class="empowerment-card">
+                        <h3>1. Ask the Right Questions</h3>
+                        <p>Prepare thoughtful questions about your industry, role progression, and skill development. The more specific your questions, the more valuable our session will be.</p>
+                    </div>
+                    <div class="empowerment-card">
+                        <h3>2. Define Your Goals</h3>
+                        <p>Clarify your short-term and long-term career objectives. Understanding where you want to go helps create a roadmap to get there.</p>
+                    </div>
+                    <div class="empowerment-card">
+                        <h3>3. Identify Challenges</h3>
+                        <p>Be honest about the obstacles you're facing. Whether it's skill gaps, industry knowledge, or career transitions, we'll address them together.</p>
+                    </div>
+                    <div class="empowerment-card">
+                        <h3>4. Research Your Industry</h3>
+                        <p>Come prepared with insights about your industry trends, key players, and emerging opportunities. This shows initiative and helps focus our discussion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Tab -->
+        <section id="booking" class="tab-content">
+            <div class="booking-container">
+                <h2>Book Your Career Consultation</h2>
+                <p class="booking-intro">Schedule a personalized session to accelerate your career growth. Our AI agent will help find the perfect time slot based on your preferences.</p>
+                
+                <div class="booking-form">
+                    <form id="bookingForm">
+                        <div class="form-section">
+                            <h3>Personal Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Career Information</h3>
+                            <div class="form-group">
+                                <label for="industry">Current Industry *</label>
+                                <select id="industry" name="industry" required>
+                                    <option value="">Select your industry</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="consulting">Consulting</option>
+                                    <option value="education">Education</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="retail">Retail</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="currentRole">Current Role/Position *</label>
+                                <input type="text" id="currentRole" name="currentRole" placeholder="e.g., Software Engineer, Marketing Associate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="experienceYears">Years of Experience *</label>
+                                <select id="experienceYears" name="experienceYears" required>
+                                    <option value="">Select experience level</option>
+                                    <option value="0-1">0-1 years</option>
+                                    <option value="1-3">1-3 years</option>
+                                    <option value="3-5">3-5 years</option>
+                                    <option value="5+">5+ years</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Career Goals & Concerns</h3>
+                            <div class="form-group">
+                                <label for="careerGoals">What are your primary career goals? *</label>
+                                <textarea id="careerGoals" name="careerGoals" rows="3" placeholder="e.g., Transition to management, switch industries, develop technical skills" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="currentChallenges">What challenges are you currently facing in your career? *</label>
+                                <textarea id="currentChallenges" name="currentChallenges" rows="3" placeholder="e.g., Lack of mentorship, unclear promotion path, skill gaps" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="specificQuestions">What specific questions do you have for our session? *</label>
+                                <textarea id="specificQuestions" name="specificQuestions" rows="3" placeholder="List 2-3 specific questions you'd like to discuss" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Session Preferences</h3>
+                            <div class="form-group">
+                                <label for="preferredDays">Preferred Days *</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferredDays" value="monday"> Monday (6-8 PM)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferredDays" value="wednesday"> Wednesday (6-8 PM)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferredDays" value="friday"> Friday (6-8 PM)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferredDays" value="saturday"> Saturday (1-4 PM)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferredDays" value="sunday"> Sunday (1-4 PM)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sessionType">Session Type *</label>
+                                <select id="sessionType" name="sessionType" required>
+                                    <option value="">Select session type</option>
+                                    <option value="career-strategy">Career Strategy Session</option>
+                                    <option value="skill-development">Skill Development Planning</option>
+                                    <option value="industry-insights">Industry Insights & Trends</option>
+                                    <option value="resume-review">Resume & Interview Prep</option>
+                                    <option value="networking">Networking Strategy</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Tab -->
+        <section id="about" class="tab-content">
+            <div class="about-container">
+                <div class="about-header">
+                    <h2>About I-Can Consulting</h2>
+                    <p class="about-subtitle">Empowering early career professionals to reach their full potential through personalized guidance and strategic career development.</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-section">
+                        <h3>Our Mission</h3>
+                        <p>At I-Can Consulting, we believe every early career professional deserves access to experienced guidance and strategic career planning. Our mission is to bridge the gap between ambition and achievement by providing personalized consulting services that empower individuals to navigate their career journeys with confidence.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Why Choose I-Can Consulting?</h3>
+                        <div class="benefits-grid">
+                            <div class="benefit">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Proven Track Record</h4>
+                                <p>Years of experience helping professionals accelerate their careers across various industries.</p>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-handshake"></i>
+                                <h4>Personalized Approach</h4>
+                                <p>Every session is tailored to your unique situation, goals, and industry context.</p>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-clock"></i>
+                                <h4>Flexible Scheduling</h4>
+                                <p>Convenient evening and weekend sessions to fit your busy schedule.</p>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-shield-alt"></i>
+                                <h4>Confidential & Safe</h4>
+                                <p>Your career discussions and personal information are kept strictly confidential.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Connect With Us</h3>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/your-profile" target="_blank" class="social-link linkedin">
+                                <i class="fab fa-linkedin"></i>
+                                <span>Connect on LinkedIn</span>
+                            </a>
+                            <a href="mailto:contact@icanconsulting.com" class="social-link email">
+                                <i class="fas fa-envelope"></i>
+                                <span>Email Us</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Session Information</h3>
+                        <div class="session-info">
+                            <div class="info-card">
+                                <h4>Weekday Sessions</h4>
+                                <p><strong>Days:</strong> Monday, Wednesday, Friday</p>
+                                <p><strong>Time:</strong> 6:00 PM - 8:00 PM</p>
+                                <p><strong>Duration:</strong> 60 minutes</p>
+                            </div>
+                            <div class="info-card">
+                                <h4>Weekend Sessions</h4>
+                                <p><strong>Days:</strong> Saturday, Sunday</p>
+                                <p><strong>Time:</strong> 1:00 PM - 4:00 PM</p>
+                                <p><strong>Duration:</strong> 60 minutes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>I-Can Consulting</h3>
+                <p>Empowering early career professionals to achieve their full potential.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a onclick="switchTab('home')">Home</a></li>
+                    <li><a onclick="switchTab('booking')">Book Session</a></li>
+                    <li><a onclick="switchTab('about')">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: contact@icanconsulting.com</p>
+                <p>Available: Mon, Wed, Fri (6-8 PM)</p>
+                <p>Sat, Sun (1-4 PM)</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 I-Can Consulting. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Booking Success Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Booking Request Submitted!</h3>
+            <p>Thank you for your booking request. Our AI agent will review your preferences and available time slots, then contact you within 24 hours to confirm your session.</p>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching Functionality
+        function switchTab(tabName) {
+            // Remove active class from all tabs and nav links
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            
+            // Add active class to selected tab and nav link
+            document.getElementById(tabName).classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.textContent.toLowerCase().includes(tabName)) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu if open
+            document.querySelector('.nav-menu').classList.remove('active');
+            document.querySelector('.hamburger').classList.remove('active');
+        }
+
+        // Mobile Navigation Toggle
+        function toggleMenu() {
+            document.querySelector('.hamburger').classList.toggle('active');
+            document.querySelector('.nav-menu').classList.toggle('active');
+        }
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('bookingModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('bookingModal')) {
+                closeModal();
+            }
+        });
+
+        // AI Agent Booking System
+        class BookingAI {
+            constructor() {
+                this.availability = {
+                    monday: { start: '18:00', end: '20:00', slots: [] },
+                    wednesday: { start: '18:00', end: '20:00', slots: [] },
+                    friday: { start: '18:00', end: '20:00', slots: [] },
+                    saturday: { start: '13:00', end: '16:00', slots: [] },
+                    sunday: { start: '13:00', end: '16:00', slots: [] }
+                };
+                this.initializeAvailability();
+            }
+
+            initializeAvailability() {
+                const today = new Date();
+                for (let week = 0; week < 4; week++) {
+                    Object.keys(this.availability).forEach(day => {
+                        const dayDate = this.getNextDayOfWeek(day, today, week);
+                        if (dayDate) {
+                            this.generateTimeSlots(day, dayDate);
+                        }
+                    });
+                }
+            }
+
+            getNextDayOfWeek(dayName, startDate, weekOffset) {
+                const days = {
+                    'monday': 1, 'tuesday': 2, 'wednesday': 3, 'thursday': 4,
+                    'friday': 5, 'saturday': 6, 'sunday': 0
+                };
+                
+                const targetDay = days[dayName.toLowerCase()];
+                const currentDay = startDate.getDay();
+                const daysToAdd = (targetDay - currentDay + 7) % 7 + (weekOffset * 7);
+                
+                const targetDate = new Date(startDate);
+                targetDate.setDate(startDate.getDate() + daysToAdd);
+                
+                return targetDate;
+            }
+
+            generateTimeSlots(day, date) {
+                const config = this.availability[day];
+                const startHour = parseInt(config.start.split(':')[0]);
+                const endHour = parseInt(config.end.split(':')[0]);
+                
+                for (let hour = startHour; hour < endHour; hour++) {
+                    const slot = {
+                        date: new Date(date),
+                        time: `${hour}:00`,
+                        available: true,
+                        duration: 60
+                    };
+                    config.slots.push(slot);
+                }
+            }
+
+            findBestSlot(preferredDays, sessionType) {
+                const availableSlots = [];
+                
+                preferredDays.forEach(day => {
+                    if (this.availability[day]) {
+                        this.availability[day].slots.forEach(slot => {
+                            if (slot.available && slot.date > new Date()) {
+                                availableSlots.push({
+                                    ...slot,
+                                    day: day
+                                });
+                            }
+                        });
+                    }
+                });
+
+                if (availableSlots.length === 0) {
+                    return null;
+                }
+
+                availableSlots.sort((a, b) => a.date - b.date);
+                return availableSlots[0];
+            }
+
+            processBooking(bookingData) {
+                const preferredDays = bookingData.preferredDays;
+                const sessionType = bookingData.sessionType;
+                
+                const bestSlot = this.findBestSlot(preferredDays, sessionType);
+                
+                if (!bestSlot) {
+                    return {
+                        success: false,
+                        message: "No available slots found for your preferred days. Please try different days or contact us directly."
+                    };
+                }
+
+                bestSlot.available = false;
+                
+                return {
+                    success: true,
+                    slot: bestSlot,
+                    message: `Booking confirmed! Your session is scheduled for ${bestSlot.day.charAt(0).toUpperCase() + bestSlot.day.slice(1)} at ${bestSlot.time} on ${bestSlot.date.toLocaleDateString()}.`
+                };
+            }
+        }
+
+        // Initialize AI Agent
+        const bookingAI = new BookingAI();
+
+        // Form Submission Handler
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(e.target);
+            const bookingData = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                industry: formData.get('industry'),
+                currentRole: formData.get('currentRole'),
+                experienceYears: formData.get('experienceYears'),
+                careerGoals: formData.get('careerGoals'),
+                currentChallenges: formData.get('currentChallenges'),
+                specificQuestions: formData.get('specificQuestions'),
+                preferredDays: formData.getAll('preferredDays'),
+                sessionType: formData.get('sessionType')
+            };
+
+            if (bookingData.preferredDays.length === 0) {
+                alert('Please select at least one preferred day.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
+
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const result = bookingAI.processBooking(bookingData);
+                
+                if (result.success) {
+                    const modalContent = document.querySelector('.modal-content');
+                    modalContent.innerHTML = `
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <h3>Booking Confirmed! 🎉</h3>
+                        <p><strong>${result.message}</strong></p>
+                        <div class="booking-details">
+                            <h4>Session Details:</h4>
+                            <p><strong>Name:</strong> ${bookingData.firstName} ${bookingData.lastName}</p>
+                            <p><strong>Email:</strong> ${bookingData.email}</p>
+                            <p><strong>Session Type:</strong> ${bookingData.sessionType.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
+                            <p><strong>Industry:</strong> ${bookingData.industry}</p>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                            You will receive a confirmation email with meeting details and preparation materials within 24 hours.
+                        </p>
+                        <div class="modal-actions">
+                            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+                        </div>
+                    `;
+                    
+                    openModal();
+                    e.target.reset();
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error('Booking error:', error);
+                alert('An error occurred while processing your booking. Please try again or contact us directly.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Form validation
+        document.addEventListener('DOMContentLoaded', () => {
+            const requiredFields = document.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                field.addEventListener('blur', () => {
+                    validateField(field);
+                });
+                
+                field.addEventListener('input', () => {
+                    if (field.classList.contains('error')) {
+                        validateField(field);
+                    }
+                });
+            });
+            
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const counter = document.createElement('div');
+                counter.className = 'char-counter';
+                counter.style.cssText = 'font-size: 0.8rem; color: #666; text-align: right; margin-top: 0.25rem;';
+                textarea.parentNode.appendChild(counter);
+                
+                textarea.addEventListener('input', () => {
+                    const remaining = 500 - textarea.value.length;
+                    counter.textContent = `${remaining} characters remaining`;
+                    counter.style.color = remaining < 50 ? '#e74c3c' : '#666';
+                });
+            });
+        });
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const errorClass = 'error';
+            
+            field.classList.remove(errorClass);
+            
+            if (field.hasAttribute('required') && !value) {
+                field.classList.add(errorClass);
+                field.style.borderColor = '#e74c3c';
+                return false;
+            }
+            
+            if (field.type === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    field.classList.add(errorClass);
+                    field.style.borderColor = '#e74c3c';
+                    return false;
+                }
+            }
+            
+            field.style.borderColor = '#e1e5e9';
+            return true;
+        }
+    </script>
+</body>
+</html>
